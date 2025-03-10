@@ -2,7 +2,7 @@ Project Overview
 
 This project involves simulating a TIAGo robot in an apartment using ROS and Gazebo. The robot is equipped with sensors and a manipulator for navigation and performing pick, carry, and place tasks. Your goal is to modify and add components to the system to handle increasingly complex tasks.
 Key Tasks
-    
+
     Detect cube
     Complete picking task 
     Carry cube to second table
@@ -10,6 +10,7 @@ Key Tasks
     Cube placed on table?
         Yes: end of task
         No: go back to initial state in front of table 1
+
 
 Setup Instructions
 
