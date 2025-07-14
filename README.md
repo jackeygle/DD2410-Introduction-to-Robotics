@@ -1,7 +1,6 @@
 Project Overview
 DD2410 - Project Mobile Manipulation
 
-https://kth-se.zoom.us/j/66385805172
 This project involves simulating a TIAGo robot in an apartment using ROS and Gazebo. The robot is equipped with sensors and a manipulator for navigation and performing pick, carry, and place tasks. Your goal is to modify and add components to the system to handle increasingly complex tasks.
 
 Setup Instructions
