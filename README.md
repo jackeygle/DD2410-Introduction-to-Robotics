@@ -264,7 +264,7 @@ transitions = [
 **Institution**: KTH Royal Institute of Technology  
 **Author**: Jackeygle  
 **Semester**: [Your Semester/Year]  
-**Grade**: [Your Grade]
+**Grade**: A
 
 ### Key Learning Objectives Met
 - [x] Mobile robot navigation and control
