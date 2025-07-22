@@ -198,16 +198,6 @@ main_tree = pt.composites.Sequence(
 - **Parallel Execution**: Simultaneous navigation and perception monitoring
 - **Failure Propagation**: Intelligent error handling and retry strategies
 
-## 🎮 State Machine Implementation
-
-### State Transition Flow
-```
-INITIAL → LOCALIZE → NAVIGATE_TO_PICK → DETECT_OBJECT → PICK_OBJECT → 
-NAVIGATE_TO_PLACE → PLACE_OBJECT → SUCCESS
-    ↓ (on any failure)
-ERROR_RECOVERY → (appropriate recovery state)
-```
-
 ### Key State Machine Features
 - **Kidnap Recovery**: Automatic re-localization when robot position is lost
 - **Navigation Monitoring**: Continuous path execution monitoring with timeout handling
@@ -314,7 +304,7 @@ ERROR_RECOVERY → (appropriate recovery state)
 
 **Course**: DD2410 Introduction to Robotics  
 **Institution**: KTH Royal Institute of Technology  
-**Author**: [Your Name]  
+**Author**: Xinle Zhang  
 **Date**: Spring 2024
 
 ### 🤝 Contributing
