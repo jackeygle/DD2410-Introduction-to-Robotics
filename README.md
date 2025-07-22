@@ -18,7 +18,7 @@ This project implements **mobile manipulation capabilities** for a TIAGo robot i
 
 ## 🎬 Project Demo
 
-[![Project Demo]([https://img.shields.io/badge/🎥-Watch%20Demo-red](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee))](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee)
+([https://img.shields.io/badge/🎥-Watch%20Demo-red](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee))](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee)
 
 *Watch the TIAGo robot performing autonomous mobile manipulation tasks including cube detection, navigation, and precise pick-place operations*
 
