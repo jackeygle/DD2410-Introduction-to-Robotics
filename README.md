@@ -8,6 +8,14 @@
 
 ---
 
+## 🎬 Demo Video
+
+You can watch a demonstration of the system in action here:
+
+[▶️ Project Demo Video](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee)
+
+---
+
 ## System Dependencies & Installation
 
 To run this project on your personal computer, you must ensure all required system dependencies are installed. Please follow these steps:
