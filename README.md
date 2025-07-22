@@ -6,6 +6,48 @@
 > 
 > **`robotics_project/scripts/behaviour_trees/bt_students.py`**
 
+---
+
+## System Dependencies & Installation
+
+To run this project on your personal computer, you must ensure all required system dependencies are installed. Please follow these steps:
+
+### 1. Prepare Your Catkin Workspace
+```bash
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws/src
+```
+
+### 2. Download Required Packages
+Clone the main course package (required for simulation and robot interfaces):
+```bash
+git clone https://github.com/kth-ros-pkg/Robotics_intro.git
+```
+
+Clone this project (recommended for updates):
+```bash
+git clone https://github.com/jackeygle/DD2410-Introduction-to-Robotics.git
+```
+
+> **Tip:** You can also download the zip file, but using git is recommended for receiving updates and bug fixes.
+
+### 3. Install System Dependencies
+Make sure you have all ROS and system dependencies installed. You can use rosdep:
+```bash
+cd ~/catkin_ws
+rosdep update
+rosdep install --from-paths src --ignore-src --rosdistro=$ROS_DISTRO -y
+```
+
+### 4. Build the Project
+```bash
+cd ~/catkin_ws
+catkin_make -DCATKIN_ENABLE_TESTING=0
+source devel/setup.bash
+```
+
+---
+
 ## Overview
 
 This project implements a sophisticated **Behavior Tree (BT)** control system for autonomous robot navigation and manipulation tasks. The core of this system is the `bt_students.py` file, which serves as the **central brain** of the robot, orchestrating complex pick-and-place operations through intelligent decision-making and robust error recovery mechanisms.
@@ -145,19 +187,21 @@ Main Sequence
 - **State Synchronization**: Updates global state after successful operations
 - **Error Handling**: Provides detailed feedback on operation status
 
+---
+
 ## 🚀 Running the System
 
-### Prerequisites
+### Launch the Simulation
+To launch the system in Gazebo and RViz, run:
 ```bash
-# ROS Noetic environment
-source /opt/ros/noetic/setup.bash
-
-# Project workspace
-cd /path/to/robotics_project
-source devel/setup.bash
+roslaunch robotics_project launch_project.launch
 ```
 
-### Launch Sequence
+- If you do **not** want to run the Gazebo graphical interface (client) to speed things up, set the `gzclient` variable in the launch file to `false`.
+
+If everything is set up correctly, you should see the robot moving around the apartment, folding its arm, approaching a chair, and lowering its head. This demonstrates how the behavior tree (in `bt_students.py`) calls services, actions, and interacts with topics to control the robot.
+
+### Manual Launch Sequence
 
 1. **Start Gazebo Simulation Environment**:
 ```bash
@@ -175,17 +219,32 @@ rosrun robotics_project bt_students.py
 # (File path: robotics_project/scripts/behaviour_trees/bt_students.py)
 ```
 
-### Alternative: Complete System Launch
-```bash
-# Single command to launch everything
-roslaunch robotics_project launch_project.launch
-```
+---
 
-### Required Dependencies
-- **ROS Packages**: `py_trees`, `py_trees_ros`, `move_base`, `amcl`
-- **Hardware Simulation**: `tiago_gazebo`, `tiago_description`
-- **Navigation**: `tiago_navigation`, `tiago_2dnav_gazebo`
-- **Computer Vision**: `aruco_ros`, `tf2_geometry_msgs`
+## 🧩 Dealing with Probabilistic Systems & Error Handling
+
+Some components in this system are **probabilistic** and may fail even if all code is correct. For example:
+- AMCL localization may fail to converge
+- The robot may drop the cube while carrying it
+- MoveIt! may compute a non-valid trajectory
+- Other random or environment-induced failures
+
+**This is expected and part of the challenge!**
+
+### How to Handle Probabilistic Failures
+- The behavior tree in `bt_students.py` is designed to detect, log, and recover from such failures.
+- Feedback from action servers and service calls is logged and used to trigger recovery behaviors.
+- The system can identify errors (e.g., failed navigation, lost localization, failed manipulation) and act accordingly.
+- You are encouraged to extend error handling and feedback mechanisms as needed.
+
+**Examples:**
+- If localization fails, the robot will spin to re-localize and retry the task.
+- If the cube is dropped, the system can attempt to re-detect and re-pick.
+- If navigation fails, the robot will reset the navigation state and try again.
+
+> **Tip:** You can monitor feedback and debug by printing/logging action and service results in the terminal, or by echoing relevant ROS topics.
+
+---
 
 ## 🎛️ Configuration Parameters
 
@@ -262,12 +321,11 @@ The `bt_students.py` file transforms a standard TIAGo robot into an intelligent 
 
 ```bash
 # 1. Launch simulation
+roslaunch robotics_project launch_project.launch
+
+# 2. (Alternative) Manual launch
 roslaunch tiago_gazebo tiago_gazebo.launch world:=final_project
-
-# 2. Start navigation
 roslaunch tiago_2dnav_gazebo tiago_navigation.launch
-
-# 3. Run the core behavior tree (THE BRAIN!)
 rosrun robotics_project bt_students.py
 # (File path: robotics_project/scripts/behaviour_trees/bt_students.py)
 ```
