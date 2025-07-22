@@ -169,21 +169,40 @@ roslaunch robotics_project rviz_project.launch
 ### Core Behavior Tree Structure
 ```python
 # Main task behavior tree composition (simplified view)
-main_tree = pt.composites.Sequence(
-    name="Complete Pick and Place Task",
-    children=[
-        CheckRobotReady(),
-        LocalizeRobot(),
-        pt.composites.Sequence([
-            NavigateToPickLocation(),
-            DetectObject(),
-            PickObject(),
-            NavigateToPlaceLocation(), 
-            PlaceObject()
-        ]),
-        ReturnToHome()
-    ]
-)
+    def create_main_sequence(self):
+        # 主任务序列
+        main_sequence = RSequence(
+            name="Main sequence",
+            children=[
+            # 检查是否被劫持并处理
+            pt.composites.Selector(
+                name="Kidnapped Check",
+                children=[
+                    StateCheck("kidnapped", False),
+                    self.create_recovery_sequence()
+                ]
+            ),
+            # 检查导航失败并处理
+            pt.composites.Selector(
+                name="Navigation Failure Check",
+                children=[
+                    StateCheck("navigation_failed", False),
+                    self.create_navigation_recovery_sequence()
+                ]
+            ),
+                # 正常任务序列
+                self.create_tuck_fallback(),
+                self.create_head_fallback("up"),
+                self.create_localization_without_kidnapped(),
+                self.create_head_fallback("down"),
+                self.create_detect_fallback(),
+                self.create_pick_fallback(),
+                self.create_localization_without_kidnapped(place=True),
+                self.create_place_fallback(),
+                self.create_check_cube_fallback()
+            ]
+        )
+        return main_sequence
 ```
 
 ### Advanced Behavior Nodes
