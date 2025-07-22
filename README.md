@@ -1,5 +1,11 @@
 # Robotics Final Project - Advanced Behavior Tree Control System
 
+> **Core File Location:**
+> 
+> The main control file, `bt_students.py`, is located at:
+> 
+> **`robotics_project/scripts/behaviour_trees/bt_students.py`**
+
 ## Overview
 
 This project implements a sophisticated **Behavior Tree (BT)** control system for autonomous robot navigation and manipulation tasks. The core of this system is the `bt_students.py` file, which serves as the **central brain** of the robot, orchestrating complex pick-and-place operations through intelligent decision-making and robust error recovery mechanisms.
@@ -24,6 +30,10 @@ The `bt_students.py` file is the **heart of the entire robotics system**. This 9
 - **Manipulation Tasks** including pick and place operations
 - **Intelligent Error Recovery** with state persistence and task resumption
 - **Centralized State Management** for coordinated system behavior
+
+### File Location
+
+> **Path:** `robotics_project/scripts/behaviour_trees/bt_students.py`
 
 ### System Architecture
 
@@ -162,6 +172,7 @@ roslaunch tiago_2dnav_gazebo tiago_navigation.launch
 3. **Run the Core Behavior Tree Controller**:
 ```bash
 rosrun robotics_project bt_students.py
+# (File path: robotics_project/scripts/behaviour_trees/bt_students.py)
 ```
 
 ### Alternative: Complete System Launch
@@ -258,6 +269,7 @@ roslaunch tiago_2dnav_gazebo tiago_navigation.launch
 
 # 3. Run the core behavior tree (THE BRAIN!)
 rosrun robotics_project bt_students.py
+# (File path: robotics_project/scripts/behaviour_trees/bt_students.py)
 ```
 
 **The magic happens in `bt_students.py` - this single file orchestrates the entire robotic system! 🤖✨**
