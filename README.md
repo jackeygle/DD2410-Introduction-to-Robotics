@@ -31,9 +31,7 @@ DD2410-Introduction-to-Robotics/
 │       ├── robotics_project/     # 🎯 MAIN PROJECT PACKAGE
 │       │   ├── scripts/          # Core implementation scripts
 │       │   │   ├── behaviour_trees/  # Advanced behavior tree implementations
-│       │   │   │   ├── behaviours_student.py     # Main BT implementation (587 lines)
-│       │   │   │   ├── bt_students_A.py          # Variant A implementation
-│       │   │   │   ├── bt_students_C.py          # Variant C implementation  
+│       │   │   │   ├── bt_students.py          # Main BT implementation  
 │       │   │   │   └── reactive_sequence.py      # Custom reactive sequence
 │       │   │   ├── state_machines/   # Finite state machine controllers
 │       │   │   │   └── sm_students.py            # Complete FSM implementation (399 lines)
