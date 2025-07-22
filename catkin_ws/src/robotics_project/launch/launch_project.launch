@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+
+  <!-- ROS PARAMETERS -->
+  <!-- Initial robot pose in Gazebo: change for levels A, C or E (F for demo)-->
+  <arg name="student_level"         default="E"/>
+  <!-- System level -->
+  <arg name="namespace_tiago"     default="/"/>
+  <arg name="namespace_project"   default="robotics_intro"/>
+  <arg name="public_sim"          default="True"/>
+  <arg name="sim_sufix"           value="_public_sim" if="$(arg public_sim)"/>
+  <arg name="sim_sufix"           value=""  unless="$(arg public_sim)"/>
+  <arg name="tf_prefix"           default=""/>
+  <env name="PAL_HOST"            value="tiago" />
+  <env name="LC_NUMERIC"          value="C" />
+
+
+  <!-- Navigation -->
+  <arg name="provide_map"     default="true"/>
+  <arg name="localization"    default="amcl"/>
+  <arg name="map_path"        default="$(find robotics_project)/pal/tiago_maps/config"/>
+  <arg name="global_planner"  default="navfn"/>
+  <arg name="local_planner"   default="eband"/>
+  <arg name="planner"         default="base"/>
+  
+  <!-- Simulation -->
+  <arg name="robot"       default="steel"/>
+  <arg name="rviz"        default="true"/>
+  <arg name="gzclient"    default="true"/>
+  <arg name="world"       default="appartment"/>
+  <arg name="recording"   default="false"/>
+  <arg name="multiple"    default="false"/>
+
+  <!-- Definitions of pregrasp motion -->
+  <rosparam command="load" file="$(find robotics_project)/config/pick_motions.yaml" /> 
+
+  <!-- Robot re-spawners -->
+  <include file="$(find robotics_project)/launch/launch_robot.launch">
+    <arg name="level"     value="$(arg student_level)"/>
+  </include>
+
+  <node pkg="rosservice" type="rosservice" name="set_cube_pose" output="screen" args="call /gazebo/set_model_state '{model_state: { model_name: aruco_cube, pose: { position: { x: -1.130530, y: -6.653650, z: 0.86250 }, orientation: {x: 0, y: 0, z: 0, w: 1 } }, twist: { linear: {x: 0 , y: 0, z: 0 } , angular: { x: 0, y: 0, z: 0 } } , reference_frame: map } }'" />
+
+  <!-- ROS NODES -->
+  <group ns="$(arg namespace_tiago)">
+  </group>
+
+  <group ns="$(arg namespace_project)">
+    <!-- Mission planner -->
+    <node pkg="robotics_project" type="sm_students.py" name="logic_state_machine" output="screen">
+      <param name="global_loc_srv"      value="/global_localization"/>
+      <param name="clear_costmaps_srv"  value="/move_base/clear_costmaps"/>
+      <param name="pick_srv"            value="/$(arg namespace_project)/pick_the_cube"/>
+      <param name="place_srv"           value="/$(arg namespace_project)/place_the_cube"/>
+      <param name="nav_goal_topic"      value=""/>
+      <param name="cmd_vel_topic"       value="/key_vel"/>
+      <param name="move_base_frame"     value="/base_link"/> <!-- Try base_link / base_footprint?-->
+      <param name="pick_pose_topic"     value="/pick_pose_topic_val"/>
+      <param name="place_pose_topic"    value="/place_pose_topic_val"/>
+      <param name="aruco_pose_topic"    value="/aruco_marker_topic"/>
+      <param name="cube_pose"           value="0.50306828716, 0.0245718046511, 0.915538062216, 0.0144467629456, 0.706141958739, 0.707257659069, -0.0306827123383"/>
+      <param name="robot_base_frame"    value="/base_link" />  <!-- Try base_link / base_footprint?-->
+      <param name="move_head_srv"       value="/$(arg namespace_project)/move_head_gui"/>
+      <param name="amcl_estimate"       value="map" />
+      <param name="move_base_feedback"  value="map" />
+    </node>
+    <node pkg="robotics_project" name="manipulation_client" type="manipulation_client.py" output="screen">  
+      <param name="marker_pose_topic"   value="/aruco_marker_topic"/>
+      <param name="pick_srv"            value="/$(arg namespace_project)/pick_the_cube"/>
+      <param name="place_srv"           value="/$(arg namespace_project)/place_the_cube"/>
+      <param name="move_head_srv"       value="/$(arg namespace_project)/move_head_gui"/>
+      <param name="pickup_marker_pose"  value="/pickup_marker"/>
+      <param name="place_marker_pose"   value="/place_marker"/>
+    </node>
+  </group>
+
+  <!-- This node had to be moved out of the group for the PlanningSceneInterface() to be constructed -->
+  <!-- Arm manipulation node -->
+  <node pkg="robotics_project" name="manipulation_server" type="manipulation_server.py" output="screen">
+      <rosparam command="load" file="$(find robotics_project)/config/pick_and_place_params.yaml" />
+      <param name="pickup_marker_pose"  value="/pickup_marker"/>
+      <param name="place_marker_pose"   value="/place_marker"/>
+  </node>
+</launch>
