@@ -82,13 +82,22 @@ DD2410-Introduction-to-Robotics/
 - **Memory-aware behaviors** with global state tracking
 
 ```python
-# Global state management for complex task coordination
-CHECK = {
-    "arm_tucked": False, "head_state": "unknown", "detected": False,
-    "picked": False, "placed": False, "cube_on_table": False, 
-    "localized": False, "navigated_pick": False, "navigated_place": False,
-    "kidnapped": False
-}
+    def __init__(self):
+        self._state = {
+            "arm_tucked": False,
+            "head_state": "unknown",
+            "detected": False,
+            "picked": False,
+            "placed": False,
+            "cube_on_table": False,
+            "localized": False,
+            "navigated_pick": False,
+            "navigated_place": False,
+            "kidnapped": False,
+            "navigation_failed": False
+            
+        }
+
 ```
 
 #### 2. **Comprehensive State Machine** (`scripts/state_machines/sm_students.py`)
