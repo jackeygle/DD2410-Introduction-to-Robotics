@@ -74,7 +74,7 @@ DD2410-Introduction-to-Robotics/
 
 ### Key Algorithms & Implementation
 
-#### 1. **Advanced Behavior Trees** (`scripts/behaviour_trees/behaviours_student.py`)
+#### 1. **Advanced Behavior Trees** (`scripts/behaviour_trees/bt_students.py`)
 - **587 lines** of sophisticated behavior tree logic
 - **30+ custom behavior nodes** for complex task composition
 - **Reactive sequences** for real-time adaptation to environmental changes
