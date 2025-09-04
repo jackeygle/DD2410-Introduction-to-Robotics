@@ -12,7 +12,9 @@
 
 You can watch a demonstration of the system in action here:
 
-[▶️ Project Demo Video](https://firebasestorage.googleapis.com/v0/b/jackeysproject.firebasestorage.app/o/project_video.mp4?alt=media&token=5fcf37e9-4518-4bfc-b251-bd34040d8fee)
+[▶️ Project Demo Vi
+
+https://github.com/user-attachments/assets/8f57cafd-7e2d-4370-b9ad-259ea3822852
 
 ---
 
