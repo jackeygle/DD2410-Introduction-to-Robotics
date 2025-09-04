@@ -12,8 +12,7 @@
 
 You can watch a demonstration of the system in action here:
 
-
-https://github.com/user-attachments/assets/project_video
+https://github.com/user-attachments/assets/326d30b4-cb1c-4c25-ba8a-1e9456ae2177
 
 ---
 
