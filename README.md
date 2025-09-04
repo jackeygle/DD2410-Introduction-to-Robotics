@@ -12,9 +12,8 @@
 
 You can watch a demonstration of the system in action here:
 
-[▶️ Project Demo Vi
 
-https://github.com/user-attachments/assets/8f57cafd-7e2d-4370-b9ad-259ea3822852
+https://github.com/user-attachments/assets/project_video
 
 ---
 
